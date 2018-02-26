@@ -172,6 +172,20 @@ def MasterFunction():
             ClockWise();
 
         del image_name
+    #button for pushing
+    recycling_button=(18,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    recycling_button = GPIO.input(18)
+    trash_button=(19,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    trash_button = GPIO.input(19)
+    if recycling_button = false
+      SetAngle(0)
+      SetAngle(90)
+    if trash_button = false
+      SetAngle(180)
+      SetAngle(90)
+      
+    
+    
 
 
 while True:
