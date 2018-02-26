@@ -2,6 +2,7 @@
 
 # import required libs and functions
 import time
+import pigpio
 import calendar
 import datetime
 import os
@@ -9,9 +10,12 @@ import RPi.GPIO as GPIO
 from picamera import PiCamera
 from classify_image import run_inference_on_image
 from class_list import class_dictionary
-
+#the color pins
+red = 10
+blue =11
+green= 12
 ## SET UP VARIABLES
-
+pi=pigpio.pi()
 # Time variables
 motor_delay = 0.001 # Sets the amount of time between each step on the motor (in seconds)
 
@@ -39,7 +43,9 @@ os.chdir(photo_depot)
 camera = PiCamera()
 class_dictionary = class_dictionary();
 
-
+def setcolor(pin,brightness):
+  pi.set_PWM_dutycycle(pin,brightness)
+  
 def predict_top_5(image_url):
     print("Tensorflow is processing the image...")
     return run_inference_on_image(image_url)
@@ -143,10 +149,12 @@ def MasterFunction():
 
         if trash_type == "r":
             ClockWise();
+            setcolor(green,255)
             time.sleep(1)
             CounterClockwise();
         else:
             CounterClockwise();
+            setcolor(red,255)
             time.sleep(1)
             ClockWise();
 
@@ -157,17 +165,4 @@ while True:
     MasterFunction()
 
 
-# # webapp
-# from flask import Flask, jsonify, render_template, request
 
-# app = Flask(__name__)
-
-# @app.route('/display', methods=['POST'])
-# def display():
-#     obj_name = top_name
-#     obj_type = class_dictionary[top_name]
-#     return jsonify(results=[obj_name, obj_type])
-
-# @app.route('/')
-# def main():
-#     return render_template('index.html')
