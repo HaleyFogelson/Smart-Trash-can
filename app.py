@@ -10,6 +10,12 @@ import RPi.GPIO as GPIO
 from picamera import PiCamera
 from classify_image import run_inference_on_image
 from class_list import class_dictionary
+#Servo motor stuff I added
+import RPi.GPIO as GPIO
+from time import sleep
+GPIO.setup(3,GPIO.OUT)
+pwm = GPIO(03,50)
+pwm.start(0)
 #the color pins
 red = 10
 blue =11
@@ -42,7 +48,14 @@ photo_depot = '/home/pi/Pictures/'
 os.chdir(photo_depot)
 camera = PiCamera()
 class_dictionary = class_dictionary();
-
+def SetAngle(angle)
+  duty = angle /18+2
+  GPIO.output(3,True)
+  pwm.ChangeDutyCycle(duty)
+  sleep(1)
+  GPIO.output(3,False)
+  pwm.ChangeDutyCycle(0)
+  
 def setcolor(pin,brightness):
   pi.set_PWM_dutycycle(pin,brightness)
   
