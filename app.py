@@ -1,5 +1,7 @@
 #!/usr/bin/env python
-
+#pin numbers colors: red 10 blue 11 green 12
+#Infared sensor 17
+#servo pin 3
 # import required libs and functions
 import time
 import pigpio
