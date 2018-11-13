@@ -17,4 +17,4 @@ In this project we use the self sorting program from autotrash but instead of a 
 
 ### DEMO
 
-See demo video for AutoTrash (the project ours is based off of) here: https://youtu.be/AzB-CW20QYA
+
